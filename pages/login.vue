@@ -12,13 +12,14 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { AuthRepository } from '~/repositories/authRepository';
+import { AuthRepositoryExprerssJs } from '~/repositoryImplementations/authRepository';
+import type { IAuthRepository } from '~/repositoryInterfaces/auth';
 
 const email = ref('');
 const password = ref('');
 const error = ref<string | null>(null);
 
-const authRepo = new AuthRepository();
+const authRepo:IAuthRepository = new AuthRepositoryExprerssJs();
 
 const login = async () => {
   try {

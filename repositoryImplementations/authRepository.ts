@@ -1,7 +1,7 @@
 // src/repositories/authRepository.ts
 import { useRuntimeConfig } from '#app';
-
-export class AuthRepository {
+import type { IAuthRepository } from '~/repositoryInterfaces/auth';
+export class AuthRepositoryExprerssJs implements IAuthRepository {
   private apiBaseUrl: string;
 
   constructor() {

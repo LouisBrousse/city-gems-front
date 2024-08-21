@@ -1,4 +1,6 @@
-export class UserRepository {
+import type { IUserRepository } from "~/repositoryInterfaces/user";
+
+export class UserRepository implements IUserRepository {
     private apiBaseUrl: string;
 
     constructor() {
