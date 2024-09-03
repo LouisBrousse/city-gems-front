@@ -3,17 +3,40 @@
         <h1>User Dashboard</h1>
         <p v-if="user">Welcome, {{ user.firstName }} {{ user.lastName }}!</p>
         <p v-if="error">{{ error }}</p>
+
+        <h2>All city spots</h2>
+        <ul>
+            <li v-for="attraction in attractions" :key="attraction.id">
+                <h3>{{ attraction.name }}</h3>
+                <p>Address: {{ attraction.address }}</p>
+                <p>Category ID: {{ attraction.category_id }}</p>
+                <p>Budget: {{ attraction.budget }}</p>
+                <p>Website: <a :href="attraction.website_link" target="_blank">{{ attraction.website_link }}</a></p>
+                <div v-if="attraction.images.length">
+                    <h4>Images:</h4>
+                    <div v-for="image in attraction.images" :key="image.id">
+                        <img :src="image.url" alt="Attraction Image" style="width: 200px; height: auto;" />
+                    </div>
+                </div>
+            </li>
+        </ul>
     </div>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
 import { UserRepository } from '~/repositoryImplementations/userRepository';
+import { AttractionRepositoryExpressJs } from '~/repositoryImplementations/attractionRepository';
+
 
 const user = ref<any>(null);
 const error = ref<string | null>(null);
 
 const userRepo = new UserRepository();
+
+const attractions = ref<any[]>([]);
+const attractionRepo = new AttractionRepositoryExpressJs();
+
 
 const fetchUserData = async () => {
     try {
@@ -29,7 +52,17 @@ const fetchUserData = async () => {
     }
 };
 
+const fetchAttractionsData = async () => {
+    try {
+        attractions.value = await attractionRepo.getAttractions();
+    } catch (err) {
+        console.error('Error fetching attractions data:', err);
+        error.value = 'Failed to fetch attractions data. Please try again later.';
+    }
+};
+
 onMounted(() => {
     fetchUserData();
+    fetchAttractionsData();
 });
 </script>
