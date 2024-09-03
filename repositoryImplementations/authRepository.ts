@@ -1,7 +1,6 @@
-// src/repositories/authRepository.ts
 import { useRuntimeConfig } from '#app';
 import type { IAuthRepository } from '~/repositoryInterfaces/auth';
-export class AuthRepositoryExprerssJs implements IAuthRepository {
+export class AuthRepositoryExpressJs implements IAuthRepository {
   private apiBaseUrl: string;
 
   constructor() {
@@ -9,7 +8,7 @@ export class AuthRepositoryExprerssJs implements IAuthRepository {
     this.apiBaseUrl = runtimeConfig.public.apiBaseUrl;
   }
 
-  // Register a new user
+
   async registerUser(user: { firstName: string; lastName: string; email: string; password: string }) {
     try {
       const response = await $fetch(`${this.apiBaseUrl}/register`, {
@@ -31,7 +30,7 @@ export class AuthRepositoryExprerssJs implements IAuthRepository {
     }
   }
 
-  // Login a user
+
   async loginUser(credentials: { email: string; password: string }) {
     try {
       const response = await $fetch(`${this.apiBaseUrl}/login`, {
@@ -53,7 +52,7 @@ export class AuthRepositoryExprerssJs implements IAuthRepository {
     }
   }
 
-  // Logout a user
+
   async logoutUser(refreshToken: string) {
     try {
       const response = await $fetch(`${this.apiBaseUrl}/logout`, {

@@ -12,14 +12,17 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { AuthRepositoryExprerssJs } from '~/repositoryImplementations/authRepository';
+import { useRouter } from 'vue-router';
+import { AuthRepositoryExpressJs } from '~/repositoryImplementations/authRepository';
 import type { IAuthRepository } from '~/repositoryInterfaces/auth';
 
 const email = ref('');
 const password = ref('');
 const error = ref<string | null>(null);
 
-const authRepo:IAuthRepository = new AuthRepositoryExprerssJs();
+const authRepo: IAuthRepository = new AuthRepositoryExpressJs();
+
+const router = useRouter();
 
 const login = async () => {
   try {
@@ -27,9 +30,17 @@ const login = async () => {
       email: email.value,
       password: password.value
     });
-    console.log('Login successful:', response);
-    // Handle successful login (e.g., store token, redirect user)
+    
+    if (response.accessToken) {
+      localStorage.setItem('accessToken', response.accessToken);
+
+      await router.push('/dashboard');
+    } else {
+   
+      error.value = 'Login failed. No access token received.';
+    }
   } catch (err) {
+  
     console.error('Login failed:', err);
     error.value = 'Login failed. Please check your credentials and try again.';
   }
