@@ -13,14 +13,13 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import { AuthRepositoryExpressJs } from '~/repositoryImplementations/authRepository';
-import type { IAuthRepository } from '~/repositoryInterfaces/auth';
+import { useAuthRepo } from '~/composables/useAuthRepo';
+
+const { authRepo } = useAuthRepo();
 
 const email = ref('');
 const password = ref('');
 const error = ref<string | null>(null);
-
-const authRepo: IAuthRepository = new AuthRepositoryExpressJs();
 
 const router = useRouter();
 
