@@ -1,12 +1,11 @@
 <template>
     <div>
-       
       <NuxtPage /> 
       <Navbar />
     </div>
   </template>
   
-  <script setup>
+  <script setup lang="ts">
   import Navbar from '~/components/Navbar.vue'
   </script>
   

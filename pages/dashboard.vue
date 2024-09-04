@@ -5,21 +5,27 @@
         <p v-if="error">{{ error }}</p>
 
         <h2>All city spots</h2>
-        <ul>
-            <li v-for="attraction in attractions" :key="attraction.id">
-                <h3>{{ attraction.name }}</h3>
-                <p>Address: {{ attraction.address }}</p>
-                <p>Category ID: {{ attraction.category_id }}</p>
-                <p>Budget: {{ attraction.budget }}</p>
-                <p>Website: <a :href="attraction.website_link" target="_blank">{{ attraction.website_link }}</a></p>
-                <div v-if="attraction.images.length">
-                    <h4>Images:</h4>
-                    <div v-for="image in attraction.images" :key="image.id">
-                        <img :src="image.url" alt="Attraction Image" style="width: 200px; height: auto;" />
-                    </div>
-                </div>
-            </li>
-        </ul>
+        <div class="grid">
+            <div class="col-12 md:col-6 lg:col-4" v-for="attraction in attractions" :key="attraction.id">
+                <Card>
+                    <template #title>
+                        {{ attraction.name }}
+                    </template>
+                    <template #content>
+                        <p>Address: {{ attraction.address }}</p>
+                        <p>Category ID: {{ attraction.category_id }}</p>
+                        <p>Budget: {{ attraction.budget }}</p>
+                        <p>Website: <a :href="attraction.website_link" target="_blank">{{ attraction.website_link }}</a></p>
+                        <div v-if="attraction.images.length">
+                            <h4>Images:</h4>
+                            <div v-for="image in attraction.images" :key="image.id">
+                                <img :src="image.url" alt="Attraction Image" style="width: 200px; height: auto;" />
+                            </div>
+                        </div>
+                    </template>
+                </Card>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -27,7 +33,7 @@
 import { ref, onMounted } from 'vue';
 import { UserRepository } from '~/repositoryImplementations/userRepository';
 import { AttractionRepositoryExpressJs } from '~/repositoryImplementations/attractionRepository';
-
+import Card from 'primevue/card';  
 
 const user = ref<any>(null);
 const error = ref<string | null>(null);
@@ -36,7 +42,6 @@ const userRepo = new UserRepository();
 
 const attractions = ref<any[]>([]);
 const attractionRepo = new AttractionRepositoryExpressJs();
-
 
 const fetchUserData = async () => {
     try {

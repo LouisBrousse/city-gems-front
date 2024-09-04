@@ -1,5 +1,6 @@
 import { useRuntimeConfig } from '#app';
 import type { IAuthRepository } from '~/repositoryInterfaces/auth';
+
 export class AuthRepositoryExpressJs implements IAuthRepository {
   private apiBaseUrl: string;
 
@@ -49,6 +50,7 @@ export class AuthRepositoryExpressJs implements IAuthRepository {
         console.error('Unexpected error:', error);
         throw new Error('An unknown error occurred');
       }
+      
     }
   }
 

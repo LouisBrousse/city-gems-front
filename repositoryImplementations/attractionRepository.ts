@@ -8,11 +8,15 @@ export class AttractionRepositoryExpressJs implements IAttractionRepository{
         this.apiBaseUrl = runtimeConfig.public.apiBaseUrl;
     }
 
-    async createAttraction(formData: FormData): Promise<any> {
+    async createAttraction(data: FormData, accessToken: string): Promise<any> {
         try {
+
             const response = await $fetch(`${this.apiBaseUrl}/attractions`, {
                 method: 'POST',
-                body: formData,
+                body: data,
+                headers: {
+                    Authorization: `Bearer ${accessToken}`,
+                  },
             });
             return response;
         } catch (error) {

@@ -24,25 +24,26 @@ const authRepo: IAuthRepository = new AuthRepositoryExpressJs();
 
 const router = useRouter();
 
+
 const login = async () => {
   try {
     const response = await authRepo.loginUser({
       email: email.value,
-      password: password.value
+      password: password.value,
     });
-    
+
     if (response.accessToken) {
       localStorage.setItem('accessToken', response.accessToken);
 
+
       await router.push('/dashboard');
     } else {
-   
       error.value = 'Login failed. No access token received.';
     }
   } catch (err) {
-  
     console.error('Login failed:', err);
     error.value = 'Login failed. Please check your credentials and try again.';
   }
 };
+
 </script>
