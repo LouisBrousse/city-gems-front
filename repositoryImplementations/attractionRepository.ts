@@ -8,14 +8,14 @@ export class AttractionRepositoryExpressJs implements IAttractionRepository{
         this.apiBaseUrl = runtimeConfig.public.apiBaseUrl;
     }
 
-    async createAttraction(data: FormData, accessToken: string): Promise<any> {
+    async createAttraction(data: FormData, refreshToken: string): Promise<any> {
         try {
 
             const response = await $fetch(`${this.apiBaseUrl}/attractions`, {
                 method: 'POST',
                 body: data,
                 headers: {
-                    Authorization: `Bearer ${accessToken}`,
+                    Authorization: `Bearer ${refreshToken}`,
                   },
             });
             return response;
@@ -25,12 +25,12 @@ export class AttractionRepositoryExpressJs implements IAttractionRepository{
         }
     }
  
-    async getAttractions(accessToken: string): Promise<any> {
+    async getAttractions(refreshToken: string): Promise<any> {
         try {
             const response = await $fetch(`${this.apiBaseUrl}/attractions`, {
                 method: 'GET',
             headers: {
-                'Authorization': `Bearer ${accessToken}`
+                'Authorization': `Bearer ${refreshToken}`
             }
             });
             return response;
