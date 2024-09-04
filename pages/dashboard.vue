@@ -59,7 +59,12 @@ const fetchUserData = async () => {
 
 const fetchAttractionsData = async () => {
     try {
-        attractions.value = await attractionRepo.getAttractions();
+        const accessToken = localStorage.getItem('accessToken');
+        if (!accessToken) {
+            throw new Error('No access token found. Please log in again.');
+        }
+
+        attractions.value = await attractionRepo.getAttractions(accessToken);
     } catch (err) {
         console.error('Error fetching attractions data:', err);
         error.value = 'Failed to fetch attractions data. Please try again later.';

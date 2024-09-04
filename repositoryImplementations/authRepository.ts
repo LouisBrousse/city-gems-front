@@ -55,7 +55,7 @@ export class AuthRepositoryExpressJs implements IAuthRepository {
   }
 
 
-  async logoutUser(refreshToken: string) {
+  async logoutUser(refreshToken: string, userId: number) {
     try {
       const response = await $fetch(`${this.apiBaseUrl}/logout`, {
         method: 'POST',
@@ -64,6 +64,7 @@ export class AuthRepositoryExpressJs implements IAuthRepository {
           'Content-Type': 'application/json',
         },
       });
+      console.log('Logout response:', response);
       return response;
     } catch (error) {
       if (error instanceof Error) {

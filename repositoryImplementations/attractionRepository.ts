@@ -25,10 +25,13 @@ export class AttractionRepositoryExpressJs implements IAttractionRepository{
         }
     }
  
-    async getAttractions(): Promise<any> {
+    async getAttractions(accessToken: string): Promise<any> {
         try {
             const response = await $fetch(`${this.apiBaseUrl}/attractions`, {
                 method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${accessToken}`
+            }
             });
             return response;
         } catch (error) {
