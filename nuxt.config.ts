@@ -9,6 +9,12 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
     '@primevue/nuxt-module',
   ],
+  typescript: {
+    tsConfig: {
+      compilerOptions: {
+      }
+    }
+  },
   
   primevue: {
     options: {

@@ -30,6 +30,11 @@
 </template>
 
 <script setup lang="ts">
+definePageMeta({
+  middleware: 'auth'
+});
+
+
 import { ref, onMounted } from 'vue';
 import { UserRepository } from '~/repositoryImplementations/userRepository';
 import { AttractionRepositoryExpressJs } from '~/repositoryImplementations/attractionRepository';

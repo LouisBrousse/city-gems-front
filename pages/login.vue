@@ -33,7 +33,17 @@ const login = async () => {
 
     if (response.accessToken) {
       localStorage.setItem('accessToken', response.accessToken);
-
+      localStorage.setItem('refreshToken', response.refreshToken);
+      
+      if (response.id) {
+        localStorage.setItem('userId', response.id.toString()); 
+        localStorage.setItem('userFirstName', response.firstName);
+        localStorage.setItem('userLastName', response.lastName);
+      } else {
+        console.error('User ID is not present in the response:', response.id);
+        error.value = 'Login failed. Invalid user ID.';
+        return;
+      }
 
       await router.push('/dashboard');
     } else {
@@ -44,5 +54,6 @@ const login = async () => {
     error.value = 'Login failed. Please check your credentials and try again.';
   }
 };
+
 
 </script>
