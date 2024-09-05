@@ -32,7 +32,13 @@ onMounted(() => {
       throw new Error('Refresh token and user ID are required. Please log in again.');
     }
 
-    await authRepo.logoutUser(refreshToken, parseInt(userId, 10));
+    const userIdNumber = parseInt(userId, 10);
+
+    if (isNaN(userIdNumber)) {
+      throw new Error('Invalid user ID.');
+    }
+
+    await authRepo.logoutUser(refreshToken, userIdNumber);
 
     localStorage.removeItem('accessToken');
     localStorage.removeItem('refreshToken');

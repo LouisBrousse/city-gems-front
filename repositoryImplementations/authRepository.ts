@@ -59,7 +59,7 @@ export class AuthRepositoryExpressJs implements IAuthRepository {
     try {
       const response = await $fetch(`${this.apiBaseUrl}/logout`, {
         method: 'POST',
-        body: JSON.stringify({ refreshToken }),
+        body: JSON.stringify({ refreshToken, userId }),
         headers: {
           'Content-Type': 'application/json',
         },
