@@ -24,7 +24,7 @@
         </div>
         <div>
           <label for="images">Images:</label>
-          <input type="file" id="images" multiple @change="handleFileUpload" />
+  <input type="file" @change="handleFileUpload" multiple />
         </div>
         <button type="submit">Add Attraction</button>
       </form>

@@ -7,23 +7,7 @@
         <h2>All city spots</h2>
         <div class="grid">
             <div class="col-12 md:col-6 lg:col-4" v-for="attraction in attractions" :key="attraction.id">
-                <Card>
-                    <template #title>
-                        {{ attraction.name }}
-                    </template>
-                    <template #content>
-                        <p>Address: {{ attraction.address }}</p>
-                        <p>Category ID: {{ attraction.category_id }}</p>
-                        <p>Budget: {{ attraction.budget }}</p>
-                        <p>Website: <a :href="attraction.website_link" target="_blank">{{ attraction.website_link }}</a></p>
-                        <div v-if="attraction.images.length">
-                            <h4>Images:</h4>
-                            <div v-for="image in attraction.images" :key="image.id">
-                                <img :src="image.url" alt="Attraction Image" style="width: 200px; height: auto;" />
-                            </div>
-                        </div>
-                    </template>
-                </Card>
+                <AttractionCard :attraction="attraction" />
             </div>
         </div>
     </div>
@@ -40,16 +24,15 @@ import { UserRepository } from '~/repositoryImplementations/userRepository';
 import { AttractionRepositoryExpressJs } from '~/repositoryImplementations/attractionRepository';
 import Card from 'primevue/card';  
 import { useUserData } from '~/composables/useUserData';
+import AttractionCard from '~/components/AttractionCard.vue';
 
 const { user, error, fetchUserData } = useUserData();
 
 
-
-const userRepo = new UserRepository();
-
 const attractions = ref<any[]>([]);
 const attractionRepo = new AttractionRepositoryExpressJs();
 
+const attraction = ref({ id: 1 });
 
 const fetchAttractionsData = async () => {
     try {
