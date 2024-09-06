@@ -24,13 +24,14 @@ import { UserRepository } from '~/repositoryImplementations/userRepository';
 import { AttractionRepositoryExpressJs } from '~/repositoryImplementations/attractionRepository';
 import Card from 'primevue/card';  
 import { useUserData } from '~/composables/useUserData';
+import { useAttractionRepo } from '~/composables/useAttractionRepo';
 import AttractionCard from '~/components/AttractionCard.vue';
 
 const { user, error, fetchUserData } = useUserData();
 
+const { attractionRepo } = useAttractionRepo();
 
 const attractions = ref<any[]>([]);
-const attractionRepo = new AttractionRepositoryExpressJs();
 
 const attraction = ref({ id: 1 });
 

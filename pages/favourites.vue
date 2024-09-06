@@ -31,10 +31,12 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
 import { FavouriteRepositoryExpressJs } from '~/repositoryImplementations/favouriteRepository';
+import { useFavouriteRepo } from '~/composables/useFavouriteRepo';
 import Card from 'primevue/card';
 
 const favourites = ref<any[]>([]);
-const favouriteRepo = new FavouriteRepositoryExpressJs();
+const { favRepo } = useFavouriteRepo();
+
 const error = ref<string | null>(null);
 
 const fetchFavouritesData = async () => {
@@ -45,8 +47,8 @@ const fetchFavouritesData = async () => {
             throw new Error('User not logged in');
         }
 
-        favourites.value = await favouriteRepo.getFavourites(Number(userId), accessToken);
-        console.log('Fetched favourites:', favourites.value); // Log the fetched data for debugging
+        favourites.value = await favRepo.getFavourites(Number(userId), accessToken);
+        console.log('Fetched favourites:', favourites.value);
     } catch (err) {
         console.error('Error fetching favourites data:', err);
         error.value = 'Failed to fetch favorites data. Please try again later.';
