@@ -29,16 +29,30 @@ export class AttractionRepositoryExpressJs implements IAttractionRepository{
         try {
             const response = await $fetch(`${this.apiBaseUrl}/attractions`, {
                 method: 'GET',
-            headers: {
-                'Authorization': `Bearer ${refreshToken}`
-            }
+                headers: {
+                    'Authorization': `Bearer ${refreshToken}`
+                }
             });
+            if (response && Array.isArray(response)) {
+                response.forEach((attraction: any) => {
+                    if (attraction.images && Array.isArray(attraction.images)) {
+                        attraction.images.forEach((image: any) => {
+                            if (image.url) {
+                                const url = new URL(image.url, this.apiBaseUrl);
+                                console.log(`Image URL: ${url.href}`);
+                            }
+                        });
+                    }
+                });
+            }
+    
             return response;
         } catch (error) {
             console.error('Failed to fetch attractions:', error);
             throw new Error('Failed to fetch attractions');
         }
     }
+    
 
     async getAttractionById(id: number): Promise<any> {
         try {

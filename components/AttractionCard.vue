@@ -11,7 +11,7 @@
             <div v-if="attraction.images.length">
                 <h4>Images:</h4>
                 <div v-for="image in attraction.images" :key="image.id">
-                    <img :src="`http://localhost:3004/${image.url}`" alt="Attraction Image" style="width: 200px; height: auto;" />
+                    <img :src="`http://localhost:3004${image.url}`" alt="Attraction Image" style="width: 200px; height: auto;" />
                 </div>
             </div>
             <AddToFavouriteBtn :attractionId="attraction.id" />

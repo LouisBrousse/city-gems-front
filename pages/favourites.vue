@@ -29,6 +29,10 @@
 </template>
 
 <script setup lang="ts">
+definePageMeta({
+  middleware: 'auth'
+});
+
 import { ref, onMounted } from 'vue';
 import { FavouriteRepositoryExpressJs } from '~/repositoryImplementations/favouriteRepository';
 import { useFavouriteRepo } from '~/composables/useFavouriteRepo';

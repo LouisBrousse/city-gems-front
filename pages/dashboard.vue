@@ -20,9 +20,6 @@ definePageMeta({
 
 
 import { ref, onMounted } from 'vue';
-import { UserRepository } from '~/repositoryImplementations/userRepository';
-import { AttractionRepositoryExpressJs } from '~/repositoryImplementations/attractionRepository';
-import Card from 'primevue/card';  
 import { useUserData } from '~/composables/useUserData';
 import { useAttractionRepo } from '~/composables/useAttractionRepo';
 import AttractionCard from '~/components/AttractionCard.vue';

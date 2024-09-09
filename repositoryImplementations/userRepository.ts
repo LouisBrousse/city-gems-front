@@ -85,5 +85,21 @@ export class UserRepository implements IUserRepository {
         }
     }
 
+    async deleteUser(userId: number, accessToken: string): Promise<any> {
+        try {
+            const response = await $fetch(`${this.apiBaseUrl}/user/${userId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${accessToken}`,
+                },
+            });
+    
+            return response;
+        } catch (error) {
+            console.error('Failed to delete user:', error);
+            throw new Error('Failed to delete user');
+        }
+    }
+
       
 }
