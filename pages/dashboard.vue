@@ -14,9 +14,9 @@
 </template>
 
 <script setup lang="ts">
-definePageMeta({
-  middleware: 'auth'
-});
+// definePageMeta({
+//   middleware: 'auth'
+// });
 
 
 import { ref, onMounted } from 'vue';
@@ -29,8 +29,6 @@ const { user, error, fetchUserData } = useUserData();
 const { attractionRepo } = useAttractionRepo();
 
 const attractions = ref<any[]>([]);
-
-const attraction = ref({ id: 1 });
 
 const fetchAttractionsData = async () => {
     try {

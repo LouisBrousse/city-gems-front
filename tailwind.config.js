@@ -8,10 +8,15 @@ module.exports = {
       './presets/**/*.{js,vue,ts}',  
     ],
     theme: {
-      extend: {},
+      extend: {
+        colors: {
+          primary: '#642CA9',  
+          secondary: '#6c757d', 
+        },
+      },
     },
     plugins: [
-      // Add any other Tailwind CSS plugins here
+      
     ],
   };
   
