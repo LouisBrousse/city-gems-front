@@ -12,7 +12,6 @@
                     </template>
                     <template #content>
                         <p>Address: {{ item.attraction.address }}</p>
-                        <p>Category ID: {{ item.attraction.category_id }}</p>
                         <p>Budget: {{ item.attraction.budget }}</p>
                         <p>Website: <a :href="item.attraction.website_link" target="_blank">{{ item.attraction.website_link }}</a></p>
                         <div v-if="(item.attraction.images || []).length">

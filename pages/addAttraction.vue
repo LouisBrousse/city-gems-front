@@ -11,10 +11,6 @@
           <input type="text" id="address" v-model="form.address" required />
         </div>
         <div>
-          <label for="category_id">Category ID:</label>
-          <input type="number" id="category_id" v-model="form.category_id" required />
-        </div>
-        <div>
           <label for="budget">Budget:</label>
           <input type="text" id="budget" v-model="form.budget" required />
         </div>
@@ -42,7 +38,6 @@
   const form = ref({
     name: '',
     address: '',
-    category_id: '',
     budget: '',
     website_link: '',
     images: []
@@ -66,7 +61,6 @@
     const formData = new FormData();
     formData.append('name', form.value.name);
     formData.append('address', form.value.address);
-    formData.append('category_id', form.value.category_id);
     formData.append('budget', form.value.budget);
 
     if (form.value.website_link) {

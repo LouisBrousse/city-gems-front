@@ -5,7 +5,6 @@
         </template>
         <template #content>
             <p>Address: {{ attraction.address }}</p>
-            <p>Category ID: {{ attraction.category_id }}</p>
             <p>Budget: {{ attraction.budget }}</p>
             <p>Website: <a :href="attraction.website_link" target="_blank">{{ attraction.website_link }}</a></p>
             <div v-if="attraction.images.length">
@@ -29,7 +28,6 @@ const props = defineProps<{
         id: number;
         name: string;
         address: string;
-        category_id: number;
         budget: number;
         website_link: string;
         images: { id: number; url: string }[];
